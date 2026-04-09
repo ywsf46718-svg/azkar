@@ -31,6 +31,7 @@
       --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
       --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body.dark {
@@ -49,7 +50,7 @@
       font-family: 'Segoe UI', 'Tahoma', 'Noto Sans Arabic', system-ui, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
-      transition: all 0.3s ease;
+      transition: var(--transition-smooth);
     }
 
     .app-container {
@@ -120,7 +121,7 @@
       background: var(--bg-primary);
       color: var(--text-primary);
       font-size: 1rem;
-      transition: all 0.2s;
+      transition: var(--transition-smooth);
     }
 
     .input-group input:focus {
@@ -136,7 +137,7 @@
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: var(--transition-smooth);
       border: none;
       background: var(--accent);
       color: white;
@@ -176,7 +177,7 @@
 
     .navbar-logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent-light)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .user-info { display: flex; align-items: center; gap: 1rem; }
-    .logout-btn { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 0.4rem 1rem; border-radius: 2rem; cursor: pointer; }
+    .logout-btn { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 0.4rem 1rem; border-radius: 2rem; cursor: pointer; transition: var(--transition-smooth); }
 
     .tabs {
       display: flex;
@@ -185,6 +186,7 @@
       gap: 0.25rem;
       overflow-x: auto;
       border-bottom: 1px solid var(--border);
+      scrollbar-width: thin;
     }
 
     .tab-btn {
@@ -197,6 +199,7 @@
       color: var(--text-muted);
       cursor: pointer;
       white-space: nowrap;
+      transition: var(--transition-smooth);
     }
 
     .tab-btn.active { background: var(--accent); color: white; }
@@ -212,6 +215,7 @@
       margin-bottom: 1rem;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
     }
 
     .card-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent); }
@@ -223,38 +227,54 @@
       padding: 1rem;
       margin-bottom: 0.75rem;
       border-right: 4px solid var(--accent);
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.2s;
     }
     .zekr-item:hover { transform: translateX(-5px); }
+    .zekr-item.complete-animation {
+      animation: celebrate 0.5s ease;
+    }
+    @keyframes celebrate {
+      0%, 100% { transform: scale(1); background: var(--bg-surface); }
+      50% { transform: scale(1.02); background: var(--accent-light); color: white; }
+    }
     .zekr-arabic { font-size: 1.25rem; margin-bottom: 0.5rem; }
     .counter-value { font-weight: 600; color: var(--accent); }
-    .counter-btn { background: var(--accent); border: none; padding: 0.4rem 1.2rem; border-radius: 2rem; color: white; cursor: pointer; }
+    .counter-btn { background: var(--accent); border: none; padding: 0.4rem 1.2rem; border-radius: 2rem; color: white; cursor: pointer; transition: var(--transition-smooth); }
+    .counter-btn:active { transform: scale(0.95); }
     .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-top: 0.5rem; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); width: 0%; transition: width 0.3s ease; }
 
     /* Quran */
-    .surah-item { padding: 0.75rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s; }
-    .surah-item:hover { background: var(--accent); color: white; border-radius: 0.5rem; }
+    .surah-item { padding: 0.75rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: var(--transition-smooth); }
+    .surah-item:hover { background: var(--accent); color: white; border-radius: 0.5rem; transform: translateX(-5px); }
     .verse-text { font-size: 1.2rem; line-height: 1.8; margin-bottom: 1rem; }
 
     /* Prayer Times */
     .prayer-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
-    .next-prayer { background: var(--accent); color: white; padding: 1rem; border-radius: 1rem; text-align: center; margin-bottom: 1rem; }
+    .next-prayer { background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: white; padding: 1rem; border-radius: 1rem; text-align: center; margin-bottom: 1rem; transition: var(--transition-smooth); }
+    .countdown-number { font-size: 1.5rem; font-weight: 700; margin-top: 0.5rem; }
 
     /* Qibla Compass */
-    .compass { width: 180px; height: 180px; margin: 1rem auto; position: relative; background: radial-gradient(circle, var(--accent) 2px, transparent 2px); background-size: 20px 20px; border-radius: 50%; border: 3px solid var(--accent); }
-    .compass-arrow { font-size: 3rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg); transition: transform 0.3s ease; }
+    .compass { width: 180px; height: 180px; margin: 1rem auto; position: relative; background: radial-gradient(circle, var(--accent) 2px, transparent 2px); background-size: 20px 20px; border-radius: 50%; border: 3px solid var(--accent); transition: var(--transition-smooth); }
+    .compass-arrow { font-size: 3rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg); transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+    .qibla-degree { margin-top: 0.5rem; font-weight: 600; color: var(--accent); }
 
     /* Tasbeeh */
-    .tasbeeh-display { text-align: center; font-size: 4rem; font-weight: 800; margin: 1.5rem 0; color: var(--accent); }
+    .tasbeeh-display { text-align: center; font-size: 4rem; font-weight: 800; margin: 1.5rem 0; color: var(--accent); transition: var(--transition-smooth); }
     .tasbeeh-buttons { display: flex; gap: 1rem; justify-content: center; }
 
     /* Toast & Notifications */
-    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--text-primary); color: var(--bg-primary); padding: 0.75rem 1.5rem; border-radius: 2rem; z-index: 1000; animation: fadeInUp 0.3s ease; }
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--text-primary); color: var(--bg-primary); padding: 0.75rem 1.5rem; border-radius: 2rem; z-index: 1000; animation: slideUp 0.3s ease; box-shadow: var(--shadow-lg); }
+    @keyframes slideUp { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+    
     .notification-popup { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); background: var(--accent); color: white; padding: 1rem 2rem; border-radius: 2rem; z-index: 2000; animation: bounce 0.5s ease; box-shadow: var(--shadow-xl); }
     @keyframes bounce { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.1); } }
 
     audio { display: none; }
+    
+    /* Loading */
+    .loader { width: 30px; height: 30px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 1rem auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
@@ -271,7 +291,7 @@
   function getSession() { return JSON.parse(localStorage.getItem(STORAGE.SESSION) || 'null'); }
   function setSession(user) { localStorage.setItem(STORAGE.SESSION, JSON.stringify({ email: user.email, username: user.username })); }
   function clearSession() { localStorage.removeItem(STORAGE.SESSION); }
-  function getUserData(email) { return JSON.parse(localStorage.getItem(STORAGE.USER_PREFIX + email) || '{"azkarProgress":{},"tasbeeh":0,"darkMode":false}'); }
+  function getUserData(email) { return JSON.parse(localStorage.getItem(STORAGE.USER_PREFIX + email) || '{"azkarProgress":{},"tasbeeh":0,"tasbeehLastReset":null,"darkMode":false}'); }
   function saveUserData(email, data) { localStorage.setItem(STORAGE.USER_PREFIX + email, JSON.stringify(data)); if(data.darkMode !== undefined) applyDarkMode(data.darkMode); }
   function applyDarkMode(isDark) { if(isDark) document.body.classList.add('dark'); else document.body.classList.remove('dark'); }
   function showToast(msg) { let t = document.querySelector('.toast'); if(t) t.remove(); let div = document.createElement('div'); div.className = 'toast'; div.textContent = msg; document.body.appendChild(div); setTimeout(() => div.remove(), 2500); }
@@ -285,7 +305,7 @@
     if(password.length < 6) { showToast('❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل'); return false; }
     users.push({ username, email: email.toLowerCase(), password: simpleHash(password) });
     saveUsers(users);
-    saveUserData(email.toLowerCase(), { azkarProgress: {}, tasbeeh: 0, darkMode: false });
+    saveUserData(email.toLowerCase(), { azkarProgress: {}, tasbeeh: 0, tasbeehLastReset: Date.now(), darkMode: false });
     showToast('✅ تم إنشاء الحساب! الرجاء تسجيل الدخول');
     return true;
   }
@@ -303,7 +323,7 @@
     return true;
   }
 
-  // ==================== AZKAR DATA (COMPLETE) ====================
+  // ==================== COMPLETE AZKAR DATA ====================
   const morningAzkar = [
     { id: 'm1', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
     { id: 'm2', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 },
@@ -328,7 +348,19 @@
     { id: 'e9', arabic: 'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ', translation: 'سبحان الله العظيم وبحمده', target: 33 }
   ];
 
-  // ==================== QURAN DATA (الإخلاص - الفلق - الناس) ====================
+  const afterPrayerAzkar = [
+    { id: 'ap1', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله (3 مرات)', target: 3 },
+    { id: 'ap2', arabic: 'اللَّهُمَّ أَنْتَ السَّلَامُ', translation: 'اللهم أنت السلام', target: 1 },
+    { id: 'ap3', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ', translation: 'لا إله إلا الله وحده لا شريك له', target: 1 }
+  ];
+
+  const beforeSleepAzkar = [
+    { id: 'bs1', arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', translation: 'باسمك اللهم أموت وأحيا', target: 1 },
+    { id: 'bs2', arabic: 'اللَّهُمَّ قِنِي عَذَابَكَ', translation: 'اللهم قني عذابك يوم تبعث عبادك', target: 1 },
+    { id: 'bs3', arabic: 'آمَنْتُ بِاللَّهِ وَرُسُلِهِ', translation: 'آمنت بالله ورسله', target: 1 }
+  ];
+
+  // ==================== QURAN DATA ====================
   const surahs = [
     { id: 112, name: 'سورة الإخلاص', verses: ['بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'قُلْ هُوَ اللَّهُ أَحَدٌ', 'اللَّهُ الصَّمَدُ', 'لَمْ يَلِدْ وَلَمْ يُولَدْ', 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ'] },
     { id: 113, name: 'سورة الفلق', verses: ['بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ', 'مِن شَرِّ مَا خَلَقَ', 'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ', 'وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ', 'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ'] },
@@ -336,14 +368,24 @@
   ];
 
   // ==================== MAIN APP ====================
-  let currentTab = 'azkar';
-  let prayerInterval, nextPrayerInterval;
+  let currentTab = 'morning';
+  let nextPrayerInterval = null;
   let qiblaWatchId = null;
+  let currentLocation = null;
 
   function renderMainApp() {
     let session = getSession();
     if(!session) { renderAuthScreen(); return; }
     let userData = getUserData(session.email);
+    
+    // Reset tasbeeh daily if needed
+    let lastReset = userData.tasbeehLastReset || 0;
+    let today = new Date().setHours(0,0,0,0);
+    if(lastReset < today) {
+      userData.tasbeeh = 0;
+      userData.tasbeehLastReset = Date.now();
+      saveUserData(session.email, userData);
+    }
     
     const root = document.getElementById('root');
     root.innerHTML = `
@@ -352,6 +394,8 @@
         <div class="tabs" id="tabs">
           <button class="tab-btn" data-tab="morning">🌅 أذكار الصباح</button>
           <button class="tab-btn" data-tab="evening">🌙 أذكار المساء</button>
+          <button class="tab-btn" data-tab="afterprayer">🕌 بعد الصلاة</button>
+          <button class="tab-btn" data-tab="sleep">😴 قبل النوم</button>
           <button class="tab-btn" data-tab="quran">📖 قرآن</button>
           <button class="tab-btn" data-tab="prayer">🕌 أوقات</button>
           <button class="tab-btn" data-tab="qibla">🧭 قبلة</button>
@@ -365,31 +409,49 @@
     panelsDiv.innerHTML = `
       <div class="panel" id="panel-morning"><div class="card"><div class="card-title">🌅 أذكار الصباح</div><div id="morningAzkarList"></div></div></div>
       <div class="panel" id="panel-evening"><div class="card"><div class="card-title">🌙 أذكار المساء</div><div id="eveningAzkarList"></div></div></div>
+      <div class="panel" id="panel-afterprayer"><div class="card"><div class="card-title">🕌 أذكار بعد الصلاة</div><div id="afterprayerAzkarList"></div></div></div>
+      <div class="panel" id="panel-sleep"><div class="card"><div class="card-title">😴 أذكار قبل النوم</div><div id="sleepAzkarList"></div></div></div>
       <div class="panel" id="panel-quran"><div class="card"><div class="card-title">📖 سور القرآن</div><div id="surahList"></div><div id="quranReader" style="display:none;"><button id="backToSurahBtn" class="btn-outline" style="margin-bottom:1rem;">← رجوع</button><div id="versesContainer"></div></div></div></div>
       <div class="panel" id="panel-prayer"><div class="card"><div class="card-title">🕌 أوقات الصلاة</div><div id="prayerTimesContent">جاري التحميل...</div></div></div>
-      <div class="panel" id="panel-qibla"><div class="card qibla-container"><div class="card-title">🧭 اتجاه القبلة</div><div class="compass"><div class="compass-arrow" id="qiblaArrow">⬆️</div></div><p id="qiblaInfo">جاري التحميل...</p><button id="getQiblaBtn" class="btn" style="margin-top:1rem;">تحديد الاتجاه</button></div></div>
-      <div class="panel" id="panel-tasbeeh"><div class="card" style="text-align:center"><div class="card-title">📿 عداد التسبيح</div><div class="tasbeeh-display" id="tasbeehCount">${userData.tasbeeh || 0}</div><div class="tasbeeh-buttons"><button id="tasbeehInc" class="btn">+1</button><button id="tasbeehReset" class="btn-outline">إعادة</button></div></div></div>`;
+      <div class="panel" id="panel-qibla"><div class="card qibla-container"><div class="card-title">🧭 اتجاه القبلة</div><div class="compass"><div class="compass-arrow" id="qiblaArrow">⬆️</div></div><p id="qiblaInfo">جاري التحميل...</p><div id="qiblaDegree" class="qibla-degree"></div><button id="getQiblaBtn" class="btn" style="margin-top:1rem;">تحديد الاتجاه</button></div></div>
+      <div class="panel" id="panel-tasbeeh"><div class="card" style="text-align:center"><div class="card-title">📿 عداد التسبيح</div><div class="tasbeeh-display" id="tasbeehCount">${userData.tasbeeh || 0}</div><div class="tasbeeh-buttons"><button id="tasbeehInc" class="btn">+1</button><button id="tasbeehReset" class="btn-outline">إعادة اليوم</button></div></div></div>`;
     
-    // Render Azkar
+    // Render all Azkar lists
     renderAzkarList('morning', session.email, morningAzkar);
     renderAzkarList('evening', session.email, eveningAzkar);
-    // Render Quran
+    renderAzkarList('afterprayer', session.email, afterPrayerAzkar);
+    renderAzkarList('sleep', session.email, beforeSleepAzkar);
+    
     renderSurahList();
-    // Prayer Times
     loadPrayerTimes();
-    // Qibla
     initQibla();
-    // Tasbeeh
+    
+    // Tasbeeh with daily reset
     let tasbeehVal = userData.tasbeeh || 0;
     const tasbeehSpan = document.getElementById('tasbeehCount');
-    document.getElementById('tasbeehInc')?.addEventListener('click', () => { tasbeehVal++; saveUserData(session.email, { ...getUserData(session.email), tasbeeh: tasbeehVal }); if(tasbeehSpan) tasbeehSpan.textContent = tasbeehVal; playClick(); showToast(`تسبيح: ${tasbeehVal}`); });
-    document.getElementById('tasbeehReset')?.addEventListener('click', () => { tasbeehVal = 0; saveUserData(session.email, { ...getUserData(session.email), tasbeeh: 0 }); if(tasbeehSpan) tasbeehSpan.textContent = '0'; playClick(); });
+    document.getElementById('tasbeehInc')?.addEventListener('click', () => { 
+      tasbeehVal++; 
+      let userD = getUserData(session.email);
+      userD.tasbeeh = tasbeehVal;
+      saveUserData(session.email, userD); 
+      if(tasbeehSpan) tasbeehSpan.textContent = tasbeehVal; 
+      playClick(); 
+      if(tasbeehVal % 10 === 0) showToast(`🎉 تسبيح: ${tasbeehVal}`);
+    });
+    document.getElementById('tasbeehReset')?.addEventListener('click', () => { 
+      tasbeehVal = 0; 
+      let userD = getUserData(session.email);
+      userD.tasbeeh = 0;
+      userD.tasbeehLastReset = Date.now();
+      saveUserData(session.email, userD); 
+      if(tasbeehSpan) tasbeehSpan.textContent = '0'; 
+      playClick();
+      showToast('✅ تم إعادة تعيين التسبيح لهذا اليوم');
+    });
     
-    // Dark Mode
     document.getElementById('darkToggle')?.addEventListener('click', () => { let d = getUserData(session.email); saveUserData(session.email, { ...d, darkMode: !d.darkMode }); });
-    document.getElementById('logoutBtn')?.addEventListener('click', () => { clearSession(); renderAuthScreen(); showToast('تم تسجيل الخروج'); if(qiblaWatchId) navigator.geolocation.clearWatch(qiblaWatchId); });
+    document.getElementById('logoutBtn')?.addEventListener('click', () => { clearSession(); renderAuthScreen(); showToast('تم تسجيل الخروج'); if(qiblaWatchId) navigator.geolocation.clearWatch(qiblaWatchId); if(nextPrayerInterval) clearInterval(nextPrayerInterval); });
     
-    // Tab switching
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         currentTab = btn.dataset.tab;
@@ -413,8 +475,7 @@
     container.innerHTML = azkarArray.map(zk => {
       let count = progress[zk.id] || 0;
       let percent = (count / zk.target) * 100;
-      let isCompleted = count >= zk.target;
-      return `<div class="zekr-item">
+      return `<div class="zekr-item" data-id="${zk.id}">
         <div class="zekr-arabic">${zk.arabic}</div>
         <div class="zekr-translation" style="font-size:0.8rem;">${zk.translation}</div>
         <div class="zekr-counter">
@@ -433,18 +494,15 @@
         let progress = getUserData(email).azkarProgress || {};
         let currentCount = progress[id] || 0;
         let newCount = currentCount + 1;
+        let itemDiv = btn.closest('.zekr-item');
         
-        // إذا اكتمل العدد، نعيد تعيين العداد إلى 0 ونعرض رسالة
         if(newCount >= target) {
           newCount = 0;
           showToast(`🎉 أكملت الذكر: ${azkarArray.find(z => z.id === id)?.arabic || ''}`);
           playClick();
-          // اهتزاز بسيط للاحتفال
-          if(btn.parentElement?.parentElement) {
-            btn.parentElement.parentElement.style.transform = 'scale(1.02)';
-            setTimeout(() => {
-              if(btn.parentElement?.parentElement) btn.parentElement.parentElement.style.transform = '';
-            }, 200);
+          if(itemDiv) {
+            itemDiv.classList.add('complete-animation');
+            setTimeout(() => itemDiv.classList.remove('complete-animation'), 500);
           }
         } else {
           playClick();
@@ -481,31 +539,16 @@
     }
   }
   
-  async function loadPrayerTimes() {
-    let container = document.getElementById('prayerTimesContent');
-    if(!container) return;
-    container.innerHTML = '<div class="loader" style="margin:1rem auto;width:30px;height:30px;"></div>';
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (pos) => {
-        let lat = pos.coords.latitude, lon = pos.coords.longitude;
-        try {
-          let res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=5`);
-          let data = await res.json();
-          if(data.code === 200) {
-            let timings = data.data.timings;
-            let nextPrayer = getNextPrayer(timings);
-            container.innerHTML = `<div class="next-prayer">🕋 الصلاة القادمة: ${nextPrayer.name} - ${nextPrayer.time}</div>` +
-              Object.entries({الفجر:timings.Fajr, الظهر:timings.Dhuhr, العصر:timings.Asr, المغرب:timings.Maghrib, العشاء:timings.Isha}).map(([k,v]) => `<div class="prayer-row"><strong>${k}</strong><span>${v}</span></div>`).join('');
-            startPrayerCountdown(timings);
-          } else throw new Error();
-        } catch(e) { fallbackPrayerTimes(container); }
-      }, () => fallbackPrayerTimes(container));
-    } else fallbackPrayerTimes(container);
-  }
-  
+  // Enhanced Prayer Times with countdown
   function getNextPrayer(timings) {
     let now = new Date();
-    let prayers = [{name:'الفجر',time:timings.Fajr},{name:'الظهر',time:timings.Dhuhr},{name:'العصر',time:timings.Asr},{name:'المغرب',time:timings.Maghrib},{name:'العشاء',time:timings.Isha}];
+    let prayers = [
+      { name: 'الفجر', time: timings.Fajr },
+      { name: 'الظهر', time: timings.Dhuhr },
+      { name: 'العصر', time: timings.Asr },
+      { name: 'المغرب', time: timings.Maghrib },
+      { name: 'العشاء', time: timings.Isha }
+    ];
     let currentHour = now.getHours(), currentMin = now.getMinutes();
     for(let p of prayers) {
       let [hour, min] = p.time.split(':').map(Number);
@@ -514,56 +557,128 @@
     return prayers[0];
   }
   
-  function startPrayerCountdown(timings) {
-    if(nextPrayerInterval) clearInterval(nextPrayerInterval);
-    nextPrayerInterval = setInterval(() => {
-      let next = getNextPrayer(timings);
-      let nextTime = new Date();
-      let [hour, min] = next.time.split(':').map(Number);
-      nextTime.setHours(hour, min, 0, 0);
-      let diff = nextTime - new Date();
-      if(diff < 0) diff += 24*60*60*1000;
-      let minutes = Math.floor(diff/60000);
-      let seconds = Math.floor((diff%60000)/1000);
-      let countdownDiv = document.querySelector('.next-prayer');
-      if(countdownDiv && !countdownDiv.innerHTML.includes('المتبقي')) countdownDiv.innerHTML = `🕋 الصلاة القادمة: ${next.name} - ${next.time}<br>⏱️ المتبقي: ${minutes}:${seconds<10?'0'+seconds:seconds}`;
-      if(minutes === 0 && seconds === 0) { showToast(`🔔 حان وقت صلاة ${next.name}`); loadPrayerTimes(); }
-    }, 1000);
+  function updateCountdown(timings) {
+    let next = getNextPrayer(timings);
+    let nextTime = new Date();
+    let [hour, min] = next.time.split(':').map(Number);
+    nextTime.setHours(hour, min, 0, 0);
+    let diff = nextTime - new Date();
+    if(diff < 0) diff += 24*60*60*1000;
+    let hours = Math.floor(diff / 3600000);
+    let minutes = Math.floor((diff % 3600000) / 60000);
+    let seconds = Math.floor((diff % 60000) / 1000);
+    let countdownDiv = document.getElementById('prayerCountdown');
+    if(countdownDiv) {
+      countdownDiv.innerHTML = `<div class="countdown-number">${hours}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}</div>`;
+    }
+    if(minutes === 0 && seconds === 0 && hours === 0) {
+      showToast(`🔔 حان وقت صلاة ${next.name}`);
+      loadPrayerTimes();
+    }
+  }
+  
+  async function loadPrayerTimes() {
+    let container = document.getElementById('prayerTimesContent');
+    if(!container) return;
+    container.innerHTML = '<div class="loader"></div>';
+    
+    const getLocationAndFetch = () => {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+          let lat = pos.coords.latitude, lon = pos.coords.longitude;
+          currentLocation = { lat, lon };
+          try {
+            let res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=5`);
+            let data = await res.json();
+            if(data.code === 200) {
+              let timings = data.data.timings;
+              let nextPrayer = getNextPrayer(timings);
+              container.innerHTML = `
+                <div class="next-prayer">
+                  🕋 الصلاة القادمة: ${nextPrayer.name} - ${nextPrayer.time}
+                  <div id="prayerCountdown" class="countdown-number"></div>
+                </div>
+                ${Object.entries({الفجر:timings.Fajr, الظهر:timings.Dhuhr, العصر:timings.Asr, المغرب:timings.Maghrib, العشاء:timings.Isha}).map(([k,v]) => `<div class="prayer-row"><strong>${k}</strong><span>${v}</span></div>`).join('')}
+              `;
+              if(nextPrayerInterval) clearInterval(nextPrayerInterval);
+              updateCountdown(timings);
+              nextPrayerInterval = setInterval(() => updateCountdown(timings), 1000);
+            } else throw new Error();
+          } catch(e) { fallbackPrayerTimes(container); }
+        }, () => fallbackPrayerTimes(container));
+      } else fallbackPrayerTimes(container);
+    };
+    getLocationAndFetch();
   }
   
   function fallbackPrayerTimes(container) {
-    container.innerHTML = `<div class="next-prayer">🕋 الصلاة القادمة: الظهر - 12:00</div><div class="prayer-row"><strong>الفجر</strong><span>05:00</span></div><div class="prayer-row"><strong>الظهر</strong><span>12:00</span></div><div class="prayer-row"><strong>العصر</strong><span>15:30</span></div><div class="prayer-row"><strong>المغرب</strong><span>18:15</span></div><div class="prayer-row"><strong>العشاء</strong><span>19:45</span></div>`;
+    let fallbackTimings = { Fajr: '05:00', Dhuhr: '12:00', Asr: '15:30', Maghrib: '18:15', Isha: '19:45' };
+    container.innerHTML = `
+      <div class="next-prayer">🕋 الصلاة القادمة: الظهر - 12:00<div id="prayerCountdown" class="countdown-number"></div></div>
+      <div class="prayer-row"><strong>الفجر</strong><span>05:00</span></div>
+      <div class="prayer-row"><strong>الظهر</strong><span>12:00</span></div>
+      <div class="prayer-row"><strong>العصر</strong><span>15:30</span></div>
+      <div class="prayer-row"><strong>المغرب</strong><span>18:15</span></div>
+      <div class="prayer-row"><strong>العشاء</strong><span>19:45</span></div>
+    `;
+    if(nextPrayerInterval) clearInterval(nextPrayerInterval);
+    updateCountdown(fallbackTimings);
+    nextPrayerInterval = setInterval(() => updateCountdown(fallbackTimings), 1000);
   }
   
+  // Enhanced Qibla with degree display
   function initQibla() {
     let arrow = document.getElementById('qiblaArrow');
     let info = document.getElementById('qiblaInfo');
+    let degreeSpan = document.getElementById('qiblaDegree');
     if(!arrow) return;
+    
     if(qiblaWatchId) navigator.geolocation.clearWatch(qiblaWatchId);
+    
+    // Handle device orientation for compass
     if(window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', (e) => { if(arrow) arrow.style.transform = `translate(-50%, -50%) rotate(${e.webkitCompassHeading || e.alpha}deg)`; });
+      window.addEventListener('deviceorientation', (e) => {
+        let heading = e.webkitCompassHeading || e.alpha;
+        if(heading !== undefined && currentLocation) {
+          let bearing = calculateQiblaBearing(currentLocation.lat, currentLocation.lon);
+          let direction = (bearing - heading + 360) % 360;
+          arrow.style.transform = `translate(-50%, -50%) rotate(${direction}deg)`;
+          if(degreeSpan) degreeSpan.textContent = `الاتجاه: ${Math.round(direction)}°`;
+        }
+      });
     }
+    
     document.getElementById('getQiblaBtn')?.addEventListener('click', () => {
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((pos) => {
-          let lat = pos.coords.latitude, lon = pos.coords.longitude;
-          let meccaLat = 21.4225, meccaLon = 39.8262;
-          let φ1 = lat * Math.PI/180, φ2 = meccaLat * Math.PI/180;
-          let Δλ = (meccaLon - lon) * Math.PI/180;
-          let y = Math.sin(Δλ) * Math.cos(φ2);
-          let x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(Δλ);
-          let bearing = (Math.atan2(y, x) * 180/Math.PI + 360) % 360;
-          if(arrow) arrow.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
+          currentLocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+          let bearing = calculateQiblaBearing(currentLocation.lat, currentLocation.lon);
+          arrow.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
           if(info) info.textContent = `اتجاه القبلة: ${Math.round(bearing)}°`;
+          if(degreeSpan) degreeSpan.textContent = `زاوية القبلة: ${Math.round(bearing)}°`;
           showToast('تم تحديث اتجاه القبلة');
-        }, () => { if(info) info.textContent = 'تعذر تحديد الموقع. الاتجاه التقريبي 135°'; if(arrow) arrow.style.transform = `translate(-50%, -50%) rotate(135deg)`; });
+        }, () => { 
+          if(info) info.textContent = 'تعذر تحديد الموقع. الاتجاه التقريبي 135°'; 
+          arrow.style.transform = `translate(-50%, -50%) rotate(135deg)`;
+          if(degreeSpan) degreeSpan.textContent = 'الاتجاه التقريبي: 135°';
+        });
       }
     });
   }
   
+  function calculateQiblaBearing(lat, lon) {
+    let meccaLat = 21.4225, meccaLon = 39.8262;
+    let φ1 = lat * Math.PI/180, φ2 = meccaLat * Math.PI/180;
+    let Δλ = (meccaLon - lon) * Math.PI/180;
+    let y = Math.sin(Δλ) * Math.cos(φ2);
+    let x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(Δλ);
+    let bearing = (Math.atan2(y, x) * 180/Math.PI + 360) % 360;
+    return bearing;
+  }
+  
   // Daily Random Azkar Notification
   function showDailyAzkarNotification() {
-    let allAzkar = [...morningAzkar, ...eveningAzkar];
+    let allAzkar = [...morningAzkar, ...eveningAzkar, ...afterPrayerAzkar, ...beforeSleepAzkar];
     let randomZekr = allAzkar[Math.floor(Math.random() * allAzkar.length)];
     let popup = document.createElement('div');
     popup.className = 'notification-popup';
@@ -572,6 +687,7 @@
     setTimeout(() => popup.remove(), 5000);
     playClick();
   }
+  
   setInterval(() => { if(getSession()) showDailyAzkarNotification(); }, 24*60*60*1000);
   setTimeout(() => { if(getSession()) showDailyAzkarNotification(); }, 5000);
   
