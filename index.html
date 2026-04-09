@@ -323,41 +323,44 @@
     return true;
   }
 
-  // ==================== COMPLETE AZKAR DATA ====================
+  // ==================== COMPLETE AZKAR DATA (FULLY SEPARATE WITH CORRECT TEXTS) ====================
   const morningAzkar = [
-    { id: 'm1', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
-    { id: 'm2', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 },
-    { id: 'm3', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
-    { id: 'm4', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 },
-    { id: 'm5', arabic: 'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ', translation: 'حسبي الله لا إله إلا هو', target: 33 },
-    { id: 'm6', arabic: 'رَضِيتُ بِاللَّهِ رَبًّا', translation: 'رضيت بالله رباً', target: 3 },
-    { id: 'm7', arabic: 'اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ', translation: 'اللهم إني أصبحت أشهدك', target: 1 },
-    { id: 'm8', arabic: 'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', translation: 'لا حول ولا قوة إلا بالله', target: 33 },
-    { id: 'm9', arabic: 'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ', translation: 'سبحان الله العظيم وبحمده', target: 33 }
+    { id: 'morning_1', arabic: 'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ', translation: 'أصبحنا وأصبح الملك لله', target: 1 },
+    { id: 'morning_2', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
+    { id: 'morning_3', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 },
+    { id: 'morning_4', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
+    { id: 'morning_5', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 },
+    { id: 'morning_6', arabic: 'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ', translation: 'حسبي الله لا إله إلا هو', target: 33 },
+    { id: 'morning_7', arabic: 'رَضِيتُ بِاللَّهِ رَبًّا', translation: 'رضيت بالله رباً', target: 3 },
+    { id: 'morning_8', arabic: 'اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ', translation: 'اللهم إني أصبحت أشهدك', target: 1 },
+    { id: 'morning_9', arabic: 'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', translation: 'لا حول ولا قوة إلا بالله', target: 33 },
+    { id: 'morning_10', arabic: 'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ', translation: 'سبحان الله العظيم وبحمده', target: 33 }
   ];
 
   const eveningAzkar = [
-    { id: 'e1', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
-    { id: 'e2', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 },
-    { id: 'e3', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
-    { id: 'e4', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 },
-    { id: 'e5', arabic: 'اللَّهُمَّ بِكَ أَمْسَيْنَا', translation: 'اللهم بك أمسينا', target: 1 },
-    { id: 'e6', arabic: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ', translation: 'أعوذ بكلمات الله التامات', target: 3 },
-    { id: 'e7', arabic: 'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ', translation: 'حسبي الله لا إله إلا هو', target: 33 },
-    { id: 'e8', arabic: 'اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ', translation: 'اللهم إني أمسيت أشهدك', target: 1 },
-    { id: 'e9', arabic: 'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ', translation: 'سبحان الله العظيم وبحمده', target: 33 }
+    { id: 'evening_1', arabic: 'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ', translation: 'أمسينا وأمسى الملك لله', target: 1 },
+    { id: 'evening_2', arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', translation: 'باسمك اللهم أموت وأحيا', target: 1 },
+    { id: 'evening_3', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
+    { id: 'evening_4', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 },
+    { id: 'evening_5', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
+    { id: 'evening_6', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 },
+    { id: 'evening_7', arabic: 'اللَّهُمَّ بِكَ أَمْسَيْنَا', translation: 'اللهم بك أمسينا', target: 1 },
+    { id: 'evening_8', arabic: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ', translation: 'أعوذ بكلمات الله التامات', target: 3 },
+    { id: 'evening_9', arabic: 'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ', translation: 'حسبي الله لا إله إلا هو', target: 33 },
+    { id: 'evening_10', arabic: 'اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ', translation: 'اللهم إني أمسيت أشهدك', target: 1 },
+    { id: 'evening_11', arabic: 'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ', translation: 'سبحان الله العظيم وبحمده', target: 33 }
   ];
 
   const afterPrayerAzkar = [
-    { id: 'ap1', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله (3 مرات)', target: 3 },
-    { id: 'ap2', arabic: 'اللَّهُمَّ أَنْتَ السَّلَامُ', translation: 'اللهم أنت السلام', target: 1 },
-    { id: 'ap3', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ', translation: 'لا إله إلا الله وحده لا شريك له', target: 1 }
+    { id: 'after_1', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله (3 مرات)', target: 3 },
+    { id: 'after_2', arabic: 'اللَّهُمَّ أَنْتَ السَّلَامُ', translation: 'اللهم أنت السلام', target: 1 },
+    { id: 'after_3', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ', translation: 'لا إله إلا الله وحده لا شريك له', target: 1 }
   ];
 
   const beforeSleepAzkar = [
-    { id: 'bs1', arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', translation: 'باسمك اللهم أموت وأحيا', target: 1 },
-    { id: 'bs2', arabic: 'اللَّهُمَّ قِنِي عَذَابَكَ', translation: 'اللهم قني عذابك يوم تبعث عبادك', target: 1 },
-    { id: 'bs3', arabic: 'آمَنْتُ بِاللَّهِ وَرُسُلِهِ', translation: 'آمنت بالله ورسله', target: 1 }
+    { id: 'sleep_1', arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', translation: 'باسمك اللهم أموت وأحيا', target: 1 },
+    { id: 'sleep_2', arabic: 'اللَّهُمَّ قِنِي عَذَابَكَ', translation: 'اللهم قني عذابك يوم تبعث عبادك', target: 1 },
+    { id: 'sleep_3', arabic: 'آمَنْتُ بِاللَّهِ وَرُسُلِهِ', translation: 'آمنت بالله ورسله', target: 1 }
   ];
 
   // ==================== QURAN DATA ====================
@@ -416,7 +419,7 @@
       <div class="panel" id="panel-qibla"><div class="card qibla-container"><div class="card-title">🧭 اتجاه القبلة</div><div class="compass"><div class="compass-arrow" id="qiblaArrow">⬆️</div></div><p id="qiblaInfo">جاري التحميل...</p><div id="qiblaDegree" class="qibla-degree"></div><button id="getQiblaBtn" class="btn" style="margin-top:1rem;">تحديد الاتجاه</button></div></div>
       <div class="panel" id="panel-tasbeeh"><div class="card" style="text-align:center"><div class="card-title">📿 عداد التسبيح</div><div class="tasbeeh-display" id="tasbeehCount">${userData.tasbeeh || 0}</div><div class="tasbeeh-buttons"><button id="tasbeehInc" class="btn">+1</button><button id="tasbeehReset" class="btn-outline">إعادة اليوم</button></div></div></div>`;
     
-    // Render all Azkar lists
+    // Render all Azkar lists with separate data
     renderAzkarList('morning', session.email, morningAzkar);
     renderAzkarList('evening', session.email, eveningAzkar);
     renderAzkarList('afterprayer', session.email, afterPrayerAzkar);
@@ -486,33 +489,40 @@
       </div>`;
     }).join('');
     
-    document.querySelectorAll('.counter-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        let type = btn.dataset.type;
-        let id = btn.dataset.id;
-        let target = parseInt(btn.dataset.target);
-        let progress = getUserData(email).azkarProgress || {};
-        let currentCount = progress[id] || 0;
-        let newCount = currentCount + 1;
-        let itemDiv = btn.closest('.zekr-item');
-        
-        if(newCount >= target) {
-          newCount = 0;
-          showToast(`🎉 أكملت الذكر: ${azkarArray.find(z => z.id === id)?.arabic || ''}`);
-          playClick();
-          if(itemDiv) {
-            itemDiv.classList.add('complete-animation');
-            setTimeout(() => itemDiv.classList.remove('complete-animation'), 500);
-          }
-        } else {
-          playClick();
-        }
-        
-        progress[id] = newCount;
-        saveUserData(email, { ...getUserData(email), azkarProgress: progress });
-        renderAzkarList(type, email, azkarArray);
-      });
+    // Use event delegation to avoid duplicate listeners
+    container.querySelectorAll('.counter-btn').forEach(btn => {
+      btn.removeEventListener('click', handleCounterClick);
+      btn.addEventListener('click', handleCounterClick);
     });
+    
+    function handleCounterClick(e) {
+      const btn = e.currentTarget;
+      const type = btn.dataset.type;
+      const id = btn.dataset.id;
+      const target = parseInt(btn.dataset.target);
+      let progress = getUserData(email).azkarProgress || {};
+      let currentCount = progress[id] || 0;
+      let newCount = currentCount + 1;
+      let itemDiv = btn.closest('.zekr-item');
+      
+      // When target is reached, reset ONLY this Zikr to 0
+      if(newCount >= target) {
+        newCount = 0;
+        const zekrText = azkarArray.find(z => z.id === id)?.arabic || '';
+        showToast(`🎉 أكملت الذكر: ${zekrText.substring(0, 30)}...`);
+        playClick();
+        if(itemDiv) {
+          itemDiv.classList.add('complete-animation');
+          setTimeout(() => itemDiv.classList.remove('complete-animation'), 500);
+        }
+      } else {
+        playClick();
+      }
+      
+      progress[id] = newCount;
+      saveUserData(email, { ...getUserData(email), azkarProgress: progress });
+      renderAzkarList(type, email, azkarArray);
+    }
   }
   
   function renderSurahList() {
