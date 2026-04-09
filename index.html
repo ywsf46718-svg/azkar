@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="نور - تطبيق إسلامي شامل مع أذكار، قرآن، أوقات صلاة، وقبلة">
+  <link rel="manifest" href="#">
+  <title>نور | رفيقك الروحي</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --accent: #0f766e;
+      --accent-light: #14b8a6;
+      --danger: #dc2626;
+      --success: #10b981;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
+
+    body.dark {
+      --bg-primary: #0f172a;
+      --bg-surface: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --card-bg: #334155;
+      --border: #475569;
+      --accent: #2dd4bf;
+      --accent-light: #5eead4;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Tahoma', 'Noto Sans Arabic', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .app-container {
+      max-width: 500px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--bg-primary);
+      box-shadow: 0 0 40px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    /* Auth Styles */
+    .auth-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-surface) 100%);
+    }
+
+    .auth-card {
+      background: var(--bg-surface);
+      border-radius: 2rem;
+      padding: 2rem 1.5rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-xl);
+      animation: fadeInUp 0.4s ease;
+      border: 1px solid var(--border);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-brand {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-brand h1 {
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .input-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border-radius: 1rem;
+      border: 1.5px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(13, 118, 110, 0.2);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.875rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn:active { transform: scale(0.98); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--text-muted);
+    }
+
+    .auth-switch span {
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Navbar & Tabs */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent-light)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .user-info { display: flex; align-items: center; gap: 1rem; }
+    .logout-btn { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 0.4rem 1rem; border-radius: 2rem; cursor: pointer; }
+
+    .tabs {
+      display: flex;
+      background: var(--bg-surface);
+      padding: 0.5rem;
+      gap: 0.25rem;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.75rem 0;
+      background: transparent;
+      border: none;
+      border-radius: 2rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active { background: var(--accent); color: white; }
+
+    .panel { display: none; padding: 1.25rem; animation: fadeIn 0.25s ease; }
+    .panel.active-panel { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 1.5rem;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent); }
+
+    /* Zekr Items */
+    .zekr-item {
+      background: var(--bg-surface);
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-right: 4px solid var(--accent);
+      transition: transform 0.2s;
+    }
+    .zekr-item:hover { transform: translateX(-5px); }
+    .zekr-arabic { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .counter-value { font-weight: 600; color: var(--accent); }
+    .counter-btn { background: var(--accent); border: none; padding: 0.4rem 1.2rem; border-radius: 2rem; color: white; cursor: pointer; }
+    .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-top: 0.5rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+
+    /* Quran */
+    .surah-item { padding: 0.75rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s; }
+    .surah-item:hover { background: var(--accent); color: white; border-radius: 0.5rem; }
+    .verse-text { font-size: 1.2rem; line-height: 1.8; margin-bottom: 1rem; }
+
+    /* Prayer Times */
+    .prayer-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .next-prayer { background: var(--accent); color: white; padding: 1rem; border-radius: 1rem; text-align: center; margin-bottom: 1rem; }
+
+    /* Qibla Compass */
+    .compass { width: 180px; height: 180px; margin: 1rem auto; position: relative; background: radial-gradient(circle, var(--accent) 2px, transparent 2px); background-size: 20px 20px; border-radius: 50%; border: 3px solid var(--accent); }
+    .compass-arrow { font-size: 3rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg); transition: transform 0.3s ease; }
+
+    /* Tasbeeh */
+    .tasbeeh-display { text-align: center; font-size: 4rem; font-weight: 800; margin: 1.5rem 0; color: var(--accent); }
+    .tasbeeh-buttons { display: flex; gap: 1rem; justify-content: center; }
+
+    /* Toast & Notifications */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--text-primary); color: var(--bg-primary); padding: 0.75rem 1.5rem; border-radius: 2rem; z-index: 1000; animation: fadeInUp 0.3s ease; }
+    .notification-popup { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); background: var(--accent); color: white; padding: 1rem 2rem; border-radius: 2rem; z-index: 2000; animation: bounce 0.5s ease; box-shadow: var(--shadow-xl); }
+    @keyframes bounce { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.1); } }
+
+    audio { display: none; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<audio id="clickSound" preload="auto"><source src="data:audio/wav;base64,U3RlYWx0aCBzb3VuZA=="></audio>
+
+<script>
+  // ==================== STORAGE & HELPERS ====================
+  const STORAGE = { USERS: 'noor_users', SESSION: 'noor_session', USER_PREFIX: 'noor_data_' };
+  
+  function simpleHash(str) { return btoa(unescape(encodeURIComponent(str))); }
+  function getUsers() { return JSON.parse(localStorage.getItem(STORAGE.USERS) || '[]'); }
+  function saveUsers(users) { localStorage.setItem(STORAGE.USERS, JSON.stringify(users)); }
+  function getSession() { return JSON.parse(localStorage.getItem(STORAGE.SESSION) || 'null'); }
+  function setSession(user) { localStorage.setItem(STORAGE.SESSION, JSON.stringify({ email: user.email, username: user.username })); }
+  function clearSession() { localStorage.removeItem(STORAGE.SESSION); }
+  function getUserData(email) { return JSON.parse(localStorage.getItem(STORAGE.USER_PREFIX + email) || '{"azkarProgress":{},"tasbeeh":0,"darkMode":false}'); }
+  function saveUserData(email, data) { localStorage.setItem(STORAGE.USER_PREFIX + email, JSON.stringify(data)); if(data.darkMode !== undefined) applyDarkMode(data.darkMode); }
+  function applyDarkMode(isDark) { if(isDark) document.body.classList.add('dark'); else document.body.classList.remove('dark'); }
+  function showToast(msg) { let t = document.querySelector('.toast'); if(t) t.remove(); let div = document.createElement('div'); div.className = 'toast'; div.textContent = msg; document.body.appendChild(div); setTimeout(() => div.remove(), 2500); }
+  function playClick() { let audio = document.getElementById('clickSound'); if(audio) audio.play().catch(e=>console.log); }
+
+  // ==================== AUTH ====================
+  function handleRegister(username, email, password) {
+    if(!username || !email || !password) { showToast('❌ الرجاء ملء جميع الحقول'); return false; }
+    let users = getUsers();
+    if(users.find(u => u.email === email.toLowerCase())) { showToast('❌ البريد الإلكتروني مسجل بالفعل'); return false; }
+    if(password.length < 6) { showToast('❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل'); return false; }
+    users.push({ username, email: email.toLowerCase(), password: simpleHash(password) });
+    saveUsers(users);
+    saveUserData(email.toLowerCase(), { azkarProgress: {}, tasbeeh: 0, darkMode: false });
+    showToast('✅ تم إنشاء الحساب! الرجاء تسجيل الدخول');
+    return true;
+  }
+
+  function handleLogin(email, password, remember = false) {
+    let users = getUsers();
+    let user = users.find(u => u.email === email.toLowerCase() && u.password === simpleHash(password));
+    if(!user) { showToast('❌ البريد الإلكتروني أو كلمة المرور غير صحيحة'); return false; }
+    setSession(user);
+    if(remember) localStorage.setItem('noor_remember', 'true');
+    else localStorage.removeItem('noor_remember');
+    let userData = getUserData(user.email);
+    applyDarkMode(userData.darkMode);
+    showToast(`✨ مرحباً ${user.username}!`);
+    return true;
+  }
+
+  // ==================== AZKAR DATA ====================
+  const azkarCategories = {
+    'صباح': [
+      { id: 'm1', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
+      { id: 'm2', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 }
+    ],
+    'مساء': [
+      { id: 'e1', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
+      { id: 'e2', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 }
+    ],
+    'نوم': [
+      { id: 's1', arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', translation: 'باسمك اللهم أموت وأحيا', target: 1 }
+    ],
+    'بعد الصلاة': [
+      { id: 'p1', arabic: 'اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ', translation: 'اللهم أعني على ذكرك', target: 3 }
+    ]
+  };
+
+  // ==================== QURAN DATA (Simplified) ====================
+  const surahs = [
+    { id: 1, name: 'الفاتحة', verses: ['بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ'] },
+    { id: 112, name: 'الإخلاص', verses: ['قُلْ هُوَ اللَّهُ أَحَدٌ', 'اللَّهُ الصَّمَدُ', 'لَمْ يَلِدْ وَلَمْ يُولَدْ', 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ'] }
+  ];
+
+  // ==================== MAIN APP ====================
+  let currentTab = 'azkar';
+  let prayerInterval, nextPrayerInterval;
+  let qiblaWatchId = null;
+
+  function renderMainApp() {
+    let session = getSession();
+    if(!session) { renderAuthScreen(); return; }
+    let userData = getUserData(session.email);
+    
+    const root = document.getElementById('root');
+    root.innerHTML = `
+      <div class="app-container">
+        <div class="navbar"><span class="navbar-logo">🕌 نور</span><div class="user-info"><span>👤 ${session.username}</span><button class="logout-btn" id="logoutBtn">خروج</button></div></div>
+        <div class="tabs" id="tabs">
+          <button class="tab-btn" data-tab="azkar">📿 أذكار</button>
+          <button class="tab-btn" data-tab="quran">📖 قرآن</button>
+          <button class="tab-btn" data-tab="prayer">🕌 أوقات</button>
+          <button class="tab-btn" data-tab="qibla">🧭 قبلة</button>
+          <button class="tab-btn" data-tab="tasbeeh">📿 تسبيح</button>
+        </div>
+        <div id="panels"></div>
+        <div style="padding:1rem;text-align:center;"><button id="darkToggle" class="btn-outline" style="width:auto;padding:0.5rem 1.5rem;">🌓 الوضع الليلي</button></div>
+      </div>`;
+    
+    const panelsDiv = document.getElementById('panels');
+    panelsDiv.innerHTML = `
+      <div class="panel" id="panel-azkar"><div class="card"><div class="card-title">📿 الأذكار اليومية</div><div id="azkarCategories"></div></div></div>
+      <div class="panel" id="panel-quran"><div class="card"><div class="card-title">📖 سور القرآن</div><div id="surahList"></div><div id="quranReader" style="display:none;"><button id="backToSurahBtn" class="btn-outline" style="margin-bottom:1rem;">← رجوع</button><div id="versesContainer"></div></div></div></div>
+      <div class="panel" id="panel-prayer"><div class="card"><div class="card-title">🕌 أوقات الصلاة</div><div id="prayerTimesContent">جاري التحميل...</div></div></div>
+      <div class="panel" id="panel-qibla"><div class="card qibla-container"><div class="card-title">🧭 اتجاه القبلة</div><div class="compass"><div class="compass-arrow" id="qiblaArrow">⬆️</div></div><p id="qiblaInfo">جاري التحميل...</p><button id="getQiblaBtn" class="btn" style="margin-top:1rem;">تحديد الاتجاه</button></div></div>
+      <div class="panel" id="panel-tasbeeh"><div class="card" style="text-align:center"><div class="card-title">📿 عداد التسبيح</div><div class="tasbeeh-display" id="tasbeehCount">${userData.tasbeeh || 0}</div><div class="tasbeeh-buttons"><button id="tasbeehInc" class="btn">+1</button><button id="tasbeehReset" class="btn-outline">إعادة</button></div></div></div>`;
+    
+    // Render Azkar
+    renderAzkar(session.email);
+    // Render Quran
+    renderSurahList();
+    // Prayer Times
+    loadPrayerTimes();
+    // Qibla
+    initQibla();
+    // Tasbeeh
+    let tasbeehVal = userData.tasbeeh || 0;
+    const tasbeehSpan = document.getElementById('tasbeehCount');
+    document.getElementById('tasbeehInc')?.addEventListener('click', () => { tasbeehVal++; saveUserData(session.email, { ...getUserData(session.email), tasbeeh: tasbeehVal }); if(tasbeehSpan) tasbeehSpan.textContent = tasbeehVal; playClick(); showToast(`تسبيح: ${tasbeehVal}`); });
+    document.getElementById('tasbeehReset')?.addEventListener('click', () => { tasbeehVal = 0; saveUserData(session.email, { ...getUserData(session.email), tasbeeh: 0 }); if(tasbeehSpan) tasbeehSpan.textContent = '0'; playClick(); });
+    
+    // Dark Mode
+    document.getElementById('darkToggle')?.addEventListener('click', () => { let d = getUserData(session.email); saveUserData(session.email, { ...d, darkMode: !d.darkMode }); });
+    document.getElementById('logoutBtn')?.addEventListener('click', () => { clearSession(); renderAuthScreen(); showToast('تم تسجيل الخروج'); if(qiblaWatchId) navigator.geolocation.clearWatch(qiblaWatchId); });
+    
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentTab = btn.dataset.tab;
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active-panel'));
+        document.getElementById(`panel-${currentTab}`)?.classList.add('active-panel');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if(currentTab === 'prayer') loadPrayerTimes();
+        if(currentTab === 'qibla') initQibla();
+      });
+    });
+    document.querySelector('.tab-btn.active')?.click();
+  }
+  
+  function renderAzkar(email) {
+    let container = document.getElementById('azkarCategories');
+    if(!container) return;
+    let userData = getUserData(email);
+    let progress = userData.azkarProgress || {};
+    container.innerHTML = Object.entries(azkarCategories).map(([cat, items]) => `
+      <div class="card"><div class="card-title">📌 ${cat}</div>
+      ${items.map(zk => {
+        let count = progress[zk.id] || 0;
+        let percent = (count / zk.target) * 100;
+        return `<div class="zekr-item"><div class="zekr-arabic">${zk.arabic}</div><div class="zekr-translation" style="font-size:0.8rem;">${zk.translation}</div><div class="zekr-counter"><span class="counter-value">${count}/${zk.target}</span><button class="counter-btn" data-id="${zk.id}" data-target="${zk.target}">+1</button></div><div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div></div>`;
+      }).join('')}</div>`).join('');
+    
+    document.querySelectorAll('.counter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        let id = btn.dataset.id;
+        let target = parseInt(btn.dataset.target);
+        let newCount = (progress[id] || 0) + 1;
+        progress[id] = newCount;
+        saveUserData(email, { ...getUserData(email), azkarProgress: progress });
+        playClick();
+        renderAzkar(email);
+        if(newCount === target) showToast(`🎉 أتممت ذكر: ${azkarCategories[Object.keys(azkarCategories).find(c=>azkarCategories[c].some(z=>z.id===id))]?.find(z=>z.id===id)?.arabic || ''}`);
+      });
+    });
+  }
+  
+  function renderSurahList() {
+    let container = document.getElementById('surahList');
+    if(!container) return;
+    container.innerHTML = surahs.map(s => `<div class="surah-item" data-id="${s.id}">📖 ${s.name}</div>`).join('');
+    document.querySelectorAll('.surah-item').forEach(el => {
+      el.addEventListener('click', () => {
+        let surah = surahs.find(s => s.id == el.dataset.id);
+        if(surah) openSurahReader(surah);
+      });
+    });
+  }
+  
+  function openSurahReader(surah) {
+    let listDiv = document.getElementById('surahList');
+    let readerDiv = document.getElementById('quranReader');
+    let versesDiv = document.getElementById('versesContainer');
+    if(listDiv && readerDiv && versesDiv) {
+      listDiv.style.display = 'none';
+      readerDiv.style.display = 'block';
+      versesDiv.innerHTML = `<h3>سورة ${surah.name}</h3>` + surah.verses.map((v, i) => `<div class="verse-text">${v}</div>`).join('');
+      document.getElementById('backToSurahBtn')?.addEventListener('click', () => { listDiv.style.display = 'block'; readerDiv.style.display = 'none'; });
+    }
+  }
+  
+  async function loadPrayerTimes() {
+    let container = document.getElementById('prayerTimesContent');
+    if(!container) return;
+    container.innerHTML = '<div class="loader" style="margin:1rem auto;width:30px;height:30px;"></div>';
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        let lat = pos.coords.latitude, lon = pos.coords.longitude;
+        try {
+          let res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=5`);
+          let data = await res.json();
+          if(data.code === 200) {
+            let timings = data.data.timings;
+            let nextPrayer = getNextPrayer(timings);
+            container.innerHTML = `<div class="next-prayer">🕋 الصلاة القادمة: ${nextPrayer.name} - ${nextPrayer.time}</div>` +
+              Object.entries({الفجر:timings.Fajr, الظهر:timings.Dhuhr, العصر:timings.Asr, المغرب:timings.Maghrib, العشاء:timings.Isha}).map(([k,v]) => `<div class="prayer-row"><strong>${k}</strong><span>${v}</span></div>`).join('');
+            startPrayerCountdown(timings);
+          } else throw new Error();
+        } catch(e) { fallbackPrayerTimes(container); }
+      }, () => fallbackPrayerTimes(container));
+    } else fallbackPrayerTimes(container);
+  }
+  
+  function getNextPrayer(timings) {
+    let now = new Date();
+    let prayers = [{name:'الفجر',time:timings.Fajr},{name:'الظهر',time:timings.Dhuhr},{name:'العصر',time:timings.Asr},{name:'المغرب',time:timings.Maghrib},{name:'العشاء',time:timings.Isha}];
+    let currentHour = now.getHours(), currentMin = now.getMinutes();
+    for(let p of prayers) {
+      let [hour, min] = p.time.split(':').map(Number);
+      if(currentHour < hour || (currentHour === hour && currentMin < min)) return p;
+    }
+    return prayers[0];
+  }
+  
+  function startPrayerCountdown(timings) {
+    if(nextPrayerInterval) clearInterval(nextPrayerInterval);
+    nextPrayerInterval = setInterval(() => {
+      let next = getNextPrayer(timings);
+      let nextTime = new Date();
+      let [hour, min] = next.time.split(':').map(Number);
+      nextTime.setHours(hour, min, 0, 0);
+      let diff = nextTime - new Date();
+      if(diff < 0) diff += 24*60*60*1000;
+      let minutes = Math.floor(diff/60000);
+      let seconds = Math.floor((diff%60000)/1000);
+      let countdownDiv = document.querySelector('.next-prayer');
+      if(countdownDiv && !countdownDiv.innerHTML.includes('المتبقي')) countdownDiv.innerHTML = `🕋 الصلاة القادمة: ${next.name} - ${next.time}<br>⏱️ المتبقي: ${minutes}:${seconds<10?'0'+seconds:seconds}`;
+      if(minutes === 0 && seconds === 0) { showToast(`🔔 حان وقت صلاة ${next.name}`); loadPrayerTimes(); }
+    }, 1000);
+  }
+  
+  function fallbackPrayerTimes(container) {
+    container.innerHTML = `<div class="next-prayer">🕋 الصلاة القادمة: الظهر - 12:00</div><div class="prayer-row"><strong>الفجر</strong><span>05:00</span></div><div class="prayer-row"><strong>الظهر</strong><span>12:00</span></div><div class="prayer-row"><strong>العصر</strong><span>15:30</span></div><div class="prayer-row"><strong>المغرب</strong><span>18:15</span></div><div class="prayer-row"><strong>العشاء</strong><span>19:45</span></div>`;
+  }
+  
+  function initQibla() {
+    let arrow = document.getElementById('qiblaArrow');
+    let info = document.getElementById('qiblaInfo');
+    if(!arrow) return;
+    if(qiblaWatchId) navigator.geolocation.clearWatch(qiblaWatchId);
+    if(window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (e) => { if(arrow) arrow.style.transform = `translate(-50%, -50%) rotate(${e.webkitCompassHeading || e.alpha}deg)`; });
+    }
+    document.getElementById('getQiblaBtn')?.addEventListener('click', () => {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          let lat = pos.coords.latitude, lon = pos.coords.longitude;
+          let meccaLat = 21.4225, meccaLon = 39.8262;
+          let φ1 = lat * Math.PI/180, φ2 = meccaLat * Math.PI/180;
+          let Δλ = (meccaLon - lon) * Math.PI/180;
+          let y = Math.sin(Δλ) * Math.cos(φ2);
+          let x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(Δλ);
+          let bearing = (Math.atan2(y, x) * 180/Math.PI + 360) % 360;
+          if(arrow) arrow.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
+          if(info) info.textContent = `اتجاه القبلة: ${Math.round(bearing)}°`;
+          showToast('تم تحديث اتجاه القبلة');
+        }, () => { if(info) info.textContent = 'تعذر تحديد الموقع. الاتجاه التقريبي 135°'; if(arrow) arrow.style.transform = `translate(-50%, -50%) rotate(135deg)`; });
+      }
+    });
+  }
+  
+  // Daily Random Azkar Notification
+  function showDailyAzkarNotification() {
+    let allAzkar = Object.values(azkarCategories).flat();
+    let randomZekr = allAzkar[Math.floor(Math.random() * allAzkar.length)];
+    let popup = document.createElement('div');
+    popup.className = 'notification-popup';
+    popup.innerHTML = `📿 ذكر اليوم<br>${randomZekr.arabic}<br>${randomZekr.translation}`;
+    document.body.appendChild(popup);
+    setTimeout(() => popup.remove(), 5000);
+    playClick();
+  }
+  setInterval(() => { if(getSession()) showDailyAzkarNotification(); }, 24*60*60*1000);
+  setTimeout(() => { if(getSession()) showDailyAzkarNotification(); }, 5000);
+  
+  // ==================== AUTH SCREEN ====================
+  function renderAuthScreen(showLogin = true) {
+    const root = document.getElementById('root');
+    root.innerHTML = `<div class="auth-container"><div class="auth-card"><div class="logo-brand"><h1>🕌 نور</h1><p>رفيقك الروحي</p></div><div id="authForm"></div><div class="auth-switch"><span id="switchBtn">${showLogin ? 'إنشاء حساب' : 'تسجيل الدخول'}</span></div></div></div>`;
+    const formDiv = document.getElementById('authForm');
+    if(showLogin) {
+      formDiv.innerHTML = `<div class="input-group"><label>البريد الإلكتروني</label><input type="email" id="loginEmail" placeholder="example@email.com"></div><div class="input-group"><label>كلمة المرور</label><input type="password" id="loginPassword" placeholder="••••••"></div><div class="input-group"><label><input type="checkbox" id="rememberMe"> تذكرني</label></div><button class="btn" id="doLogin">دخول →</button>`;
+      document.getElementById('doLogin')?.addEventListener('click', () => { let email = document.getElementById('loginEmail').value, pass = document.getElementById('loginPassword').value, rem = document.getElementById('rememberMe').checked; if(handleLogin(email, pass, rem)) renderMainApp(); });
+    } else {
+      formDiv.innerHTML = `<div class="input-group"><label>اسم المستخدم</label><input type="text" id="regName"></div><div class="input-group"><label>البريد الإلكتروني</label><input type="email" id="regEmail"></div><div class="input-group"><label>كلمة المرور</label><input type="password" id="regPass"></div><button class="btn" id="doReg">تسجيل →</button>`;
+      document.getElementById('doReg')?.addEventListener('click', () => { let name = document.getElementById('regName').value, email = document.getElementById('regEmail').value, pass = document.getElementById('regPass').value; if(handleRegister(name, email, pass)) renderAuthScreen(true); });
+    }
+    document.getElementById('switchBtn')?.addEventListener('click', () => renderAuthScreen(!showLogin));
+  }
+  
+  // ==================== PWA SERVICE WORKER & MANIFEST ====================
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(console.log);
+    // Create dynamic manifest
+    let manifest = { name:"نور", short_name:"نور", start_url:".", display:"standalone", theme_color:"#0f766e", background_color:"#0f766e", icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%230f766e'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white'%3E🕌%3C/text%3E%3C/svg%3E", sizes:"any"}] };
+    let manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+    let manifestURL = URL.createObjectURL(manifestBlob);
+    document.querySelector('link[rel="manifest"]')?.setAttribute('href', manifestURL);
+  }
+  
+  // ==================== INIT ====================
+  function init() {
+    if(!localStorage.getItem(STORAGE.USERS)) saveUsers([{ username:'زائر', email:'guest@noor.com', password:simpleHash('guest123') }]);
+    let session = getSession();
+    if(session && getUsers().find(u=>u.email===session.email)) renderMainApp();
+    else renderAuthScreen(true);
+  }
+  init();
+</script>
+</body>
+</html>
