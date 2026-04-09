@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0f766e">
-  <meta name="description" content="نور - تطبيق إسلامي شامل مع أذكار، قرآن، أوقات صلاة، وقبلة">
+  <meta name="description" content="نور - تطبيق إسلامي شامل مع أذكار كاملة، قرآن، أوقات صلاة، وقبلة">
   <link rel="manifest" href="#">
   <title>نور | رفيقك الروحي</title>
   <style>
@@ -303,28 +303,36 @@
     return true;
   }
 
-  // ==================== AZKAR DATA ====================
-  const azkarCategories = {
-    'صباح': [
-      { id: 'm1', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
-      { id: 'm2', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 }
-    ],
-    'مساء': [
-      { id: 'e1', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
-      { id: 'e2', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 }
-    ],
-    'نوم': [
-      { id: 's1', arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', translation: 'باسمك اللهم أموت وأحيا', target: 1 }
-    ],
-    'بعد الصلاة': [
-      { id: 'p1', arabic: 'اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ', translation: 'اللهم أعني على ذكرك', target: 3 }
-    ]
-  };
+  // ==================== AZKAR DATA (COMPLETE) ====================
+  const morningAzkar = [
+    { id: 'm1', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
+    { id: 'm2', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 },
+    { id: 'm3', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
+    { id: 'm4', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 },
+    { id: 'm5', arabic: 'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ', translation: 'حسبي الله لا إله إلا هو', target: 33 },
+    { id: 'm6', arabic: 'رَضِيتُ بِاللَّهِ رَبًّا', translation: 'رضيت بالله رباً', target: 3 },
+    { id: 'm7', arabic: 'اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ', translation: 'اللهم إني أصبحت أشهدك', target: 1 },
+    { id: 'm8', arabic: 'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', translation: 'لا حول ولا قوة إلا بالله', target: 33 },
+    { id: 'm9', arabic: 'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ', translation: 'سبحان الله العظيم وبحمده', target: 33 }
+  ];
 
-  // ==================== QURAN DATA (Simplified) ====================
+  const eveningAzkar = [
+    { id: 'e1', arabic: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', translation: 'سبحان الله وبحمده', target: 33 },
+    { id: 'e2', arabic: 'لَا إِلَهَ إِلَّا اللَّهُ', translation: 'لا إله إلا الله', target: 33 },
+    { id: 'e3', arabic: 'أَسْتَغْفِرُ اللَّهَ', translation: 'أستغفر الله', target: 33 },
+    { id: 'e4', arabic: 'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ', translation: 'اللهم صل على محمد', target: 33 },
+    { id: 'e5', arabic: 'اللَّهُمَّ بِكَ أَمْسَيْنَا', translation: 'اللهم بك أمسينا', target: 1 },
+    { id: 'e6', arabic: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ', translation: 'أعوذ بكلمات الله التامات', target: 3 },
+    { id: 'e7', arabic: 'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ', translation: 'حسبي الله لا إله إلا هو', target: 33 },
+    { id: 'e8', arabic: 'اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ', translation: 'اللهم إني أمسيت أشهدك', target: 1 },
+    { id: 'e9', arabic: 'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ', translation: 'سبحان الله العظيم وبحمده', target: 33 }
+  ];
+
+  // ==================== QURAN DATA (الإخلاص - الفلق - الناس) ====================
   const surahs = [
-    { id: 1, name: 'الفاتحة', verses: ['بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ'] },
-    { id: 112, name: 'الإخلاص', verses: ['قُلْ هُوَ اللَّهُ أَحَدٌ', 'اللَّهُ الصَّمَدُ', 'لَمْ يَلِدْ وَلَمْ يُولَدْ', 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ'] }
+    { id: 112, name: 'سورة الإخلاص', verses: ['بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'قُلْ هُوَ اللَّهُ أَحَدٌ', 'اللَّهُ الصَّمَدُ', 'لَمْ يَلِدْ وَلَمْ يُولَدْ', 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ'] },
+    { id: 113, name: 'سورة الفلق', verses: ['بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ', 'مِن شَرِّ مَا خَلَقَ', 'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ', 'وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ', 'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ'] },
+    { id: 114, name: 'سورة الناس', verses: ['بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ', 'مَلِكِ النَّاسِ', 'إِلَٰهِ النَّاسِ', 'مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ', 'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ', 'مِنَ الْجِنَّةِ وَالنَّاسِ'] }
   ];
 
   // ==================== MAIN APP ====================
@@ -342,7 +350,8 @@
       <div class="app-container">
         <div class="navbar"><span class="navbar-logo">🕌 نور</span><div class="user-info"><span>👤 ${session.username}</span><button class="logout-btn" id="logoutBtn">خروج</button></div></div>
         <div class="tabs" id="tabs">
-          <button class="tab-btn" data-tab="azkar">📿 أذكار</button>
+          <button class="tab-btn" data-tab="morning">🌅 أذكار الصباح</button>
+          <button class="tab-btn" data-tab="evening">🌙 أذكار المساء</button>
           <button class="tab-btn" data-tab="quran">📖 قرآن</button>
           <button class="tab-btn" data-tab="prayer">🕌 أوقات</button>
           <button class="tab-btn" data-tab="qibla">🧭 قبلة</button>
@@ -354,14 +363,16 @@
     
     const panelsDiv = document.getElementById('panels');
     panelsDiv.innerHTML = `
-      <div class="panel" id="panel-azkar"><div class="card"><div class="card-title">📿 الأذكار اليومية</div><div id="azkarCategories"></div></div></div>
+      <div class="panel" id="panel-morning"><div class="card"><div class="card-title">🌅 أذكار الصباح</div><div id="morningAzkarList"></div></div></div>
+      <div class="panel" id="panel-evening"><div class="card"><div class="card-title">🌙 أذكار المساء</div><div id="eveningAzkarList"></div></div></div>
       <div class="panel" id="panel-quran"><div class="card"><div class="card-title">📖 سور القرآن</div><div id="surahList"></div><div id="quranReader" style="display:none;"><button id="backToSurahBtn" class="btn-outline" style="margin-bottom:1rem;">← رجوع</button><div id="versesContainer"></div></div></div></div>
       <div class="panel" id="panel-prayer"><div class="card"><div class="card-title">🕌 أوقات الصلاة</div><div id="prayerTimesContent">جاري التحميل...</div></div></div>
       <div class="panel" id="panel-qibla"><div class="card qibla-container"><div class="card-title">🧭 اتجاه القبلة</div><div class="compass"><div class="compass-arrow" id="qiblaArrow">⬆️</div></div><p id="qiblaInfo">جاري التحميل...</p><button id="getQiblaBtn" class="btn" style="margin-top:1rem;">تحديد الاتجاه</button></div></div>
       <div class="panel" id="panel-tasbeeh"><div class="card" style="text-align:center"><div class="card-title">📿 عداد التسبيح</div><div class="tasbeeh-display" id="tasbeehCount">${userData.tasbeeh || 0}</div><div class="tasbeeh-buttons"><button id="tasbeehInc" class="btn">+1</button><button id="tasbeehReset" class="btn-outline">إعادة</button></div></div></div>`;
     
     // Render Azkar
-    renderAzkar(session.email);
+    renderAzkarList('morning', session.email, morningAzkar);
+    renderAzkarList('evening', session.email, eveningAzkar);
     // Render Quran
     renderSurahList();
     // Prayer Times
@@ -390,32 +401,58 @@
         if(currentTab === 'qibla') initQibla();
       });
     });
-    document.querySelector('.tab-btn.active')?.click();
+    document.querySelector('.tab-btn')?.click();
   }
   
-  function renderAzkar(email) {
-    let container = document.getElementById('azkarCategories');
+  function renderAzkarList(type, email, azkarArray) {
+    let container = document.getElementById(`${type}AzkarList`);
     if(!container) return;
     let userData = getUserData(email);
     let progress = userData.azkarProgress || {};
-    container.innerHTML = Object.entries(azkarCategories).map(([cat, items]) => `
-      <div class="card"><div class="card-title">📌 ${cat}</div>
-      ${items.map(zk => {
-        let count = progress[zk.id] || 0;
-        let percent = (count / zk.target) * 100;
-        return `<div class="zekr-item"><div class="zekr-arabic">${zk.arabic}</div><div class="zekr-translation" style="font-size:0.8rem;">${zk.translation}</div><div class="zekr-counter"><span class="counter-value">${count}/${zk.target}</span><button class="counter-btn" data-id="${zk.id}" data-target="${zk.target}">+1</button></div><div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div></div>`;
-      }).join('')}</div>`).join('');
+    
+    container.innerHTML = azkarArray.map(zk => {
+      let count = progress[zk.id] || 0;
+      let percent = (count / zk.target) * 100;
+      let isCompleted = count >= zk.target;
+      return `<div class="zekr-item">
+        <div class="zekr-arabic">${zk.arabic}</div>
+        <div class="zekr-translation" style="font-size:0.8rem;">${zk.translation}</div>
+        <div class="zekr-counter">
+          <span class="counter-value">${count}/${zk.target}</span>
+          <button class="counter-btn" data-type="${type}" data-id="${zk.id}" data-target="${zk.target}">+1</button>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
+      </div>`;
+    }).join('');
     
     document.querySelectorAll('.counter-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        let type = btn.dataset.type;
         let id = btn.dataset.id;
         let target = parseInt(btn.dataset.target);
-        let newCount = (progress[id] || 0) + 1;
+        let progress = getUserData(email).azkarProgress || {};
+        let currentCount = progress[id] || 0;
+        let newCount = currentCount + 1;
+        
+        // إذا اكتمل العدد، نعيد تعيين العداد إلى 0 ونعرض رسالة
+        if(newCount >= target) {
+          newCount = 0;
+          showToast(`🎉 أكملت الذكر: ${azkarArray.find(z => z.id === id)?.arabic || ''}`);
+          playClick();
+          // اهتزاز بسيط للاحتفال
+          if(btn.parentElement?.parentElement) {
+            btn.parentElement.parentElement.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+              if(btn.parentElement?.parentElement) btn.parentElement.parentElement.style.transform = '';
+            }, 200);
+          }
+        } else {
+          playClick();
+        }
+        
         progress[id] = newCount;
         saveUserData(email, { ...getUserData(email), azkarProgress: progress });
-        playClick();
-        renderAzkar(email);
-        if(newCount === target) showToast(`🎉 أتممت ذكر: ${azkarCategories[Object.keys(azkarCategories).find(c=>azkarCategories[c].some(z=>z.id===id))]?.find(z=>z.id===id)?.arabic || ''}`);
+        renderAzkarList(type, email, azkarArray);
       });
     });
   }
@@ -439,7 +476,7 @@
     if(listDiv && readerDiv && versesDiv) {
       listDiv.style.display = 'none';
       readerDiv.style.display = 'block';
-      versesDiv.innerHTML = `<h3>سورة ${surah.name}</h3>` + surah.verses.map((v, i) => `<div class="verse-text">${v}</div>`).join('');
+      versesDiv.innerHTML = `<h3>${surah.name}</h3>` + surah.verses.map((v, i) => `<div class="verse-text">${v}</div>`).join('');
       document.getElementById('backToSurahBtn')?.addEventListener('click', () => { listDiv.style.display = 'block'; readerDiv.style.display = 'none'; });
     }
   }
@@ -526,7 +563,7 @@
   
   // Daily Random Azkar Notification
   function showDailyAzkarNotification() {
-    let allAzkar = Object.values(azkarCategories).flat();
+    let allAzkar = [...morningAzkar, ...eveningAzkar];
     let randomZekr = allAzkar[Math.floor(Math.random() * allAzkar.length)];
     let popup = document.createElement('div');
     popup.className = 'notification-popup';
@@ -556,7 +593,6 @@
   // ==================== PWA SERVICE WORKER & MANIFEST ====================
   if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(console.log);
-    // Create dynamic manifest
     let manifest = { name:"نور", short_name:"نور", start_url:".", display:"standalone", theme_color:"#0f766e", background_color:"#0f766e", icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%230f766e'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white'%3E🕌%3C/text%3E%3C/svg%3E", sizes:"any"}] };
     let manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
     let manifestURL = URL.createObjectURL(manifestBlob);
